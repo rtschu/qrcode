@@ -38,6 +38,14 @@ matrix:
     env: DB=pgsql MOODLE_BRANCH=MOODLE_35_STABLE
   - php: 5.6
     env: DB=mysqli MOODLE_BRANCH=MOODLE_35_STABLE
+  - php: 5.6
+    env: DB=pgsql MOODLE_BRANCH=MOODLE_36_STABLE
+  - php: 5.6
+    env: DB=mysqli MOODLE_BRANCH=MOODLE_36_STABLE
+  - php: 7.0
+    env: DB=mysqli MOODLE_BRANCH=master
+  - php: 7.0
+    env: DB=pgsql MOODLE_BRANCH=master
   #- php: 5.6
   #  env: DB=pgsql MOODLE_BRANCH=MOODLE_36_STABLE
   #- php: 5.6
@@ -73,7 +81,10 @@ jobs:
     # Prechecks against latest Moodle stable only.
     - stage: static
       php: 7.1
-      env: DB=mysqli MOODLE_BRANCH=MOODLE_35_STABLE
+      env:
+      - DB=mysqli MOODLE_BRANCH=MOODLE_35_STABLE
+      - DB=mysqli MOODLE_BRANCH=MOODLE_36_STABLE
+      - DB=mysqli MOODLE_BRANCH=master
       install:
       - moodle-plugin-ci install --no-init
       script:
@@ -88,7 +99,10 @@ jobs:
     # Smaller build matrix for development builds
     - stage: develop
       php: 7.1
-      env: DB=mysqli MOODLE_BRANCH=MOODLE_35_STABLE
+      env:
+        - DB=mysqli MOODLE_BRANCH=MOODLE_35_STABLE
+        - DB=mysqli MOODLE_BRANCH=MOODLE_36_STABLE
+        - DB=mysqli MOODLE_BRANCH=master
       install:
       - moodle-plugin-ci install
       script:
